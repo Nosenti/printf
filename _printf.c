@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stdio.h>
+#include "0-putchar.c"
 #include <stdarg.h>
 
 /**
@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 	{
 		if (*p != '%')
 		{
-			putchar(*p);
+			_putchar(*p);
 			printed_chars++;
 			continue;
 		}
@@ -30,7 +30,7 @@ int _printf(const char *format, ...)
 			case 'c':
 				char c = va_arg(args, int);
 
-				putchar(c);
+				_putchar(c);
 				printed_chars++;
 				break;
 			case 's':
@@ -38,12 +38,12 @@ int _printf(const char *format, ...)
 
 				for (char *str = s; *str != '\0'; str++)
 				{
-					putchar(*str);
+					_putchar(*str);
 					printed_chars++;
 				}
 				break;
 			case '%':
-				putchar('%');
+				_putchar('%');
 				printed_chars++;
 				break;
 			default:
