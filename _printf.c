@@ -12,7 +12,11 @@ int _printf(const char *format, ...)
         int char_count;
         va_list arg_list;
 
-        char_count = 0;
+	if (*format == NULL)
+	{
+		return (-1);
+	}
+	char_count = 0;
         va_start(arg_list, format);
         while (*format != '\0')
         {
