@@ -45,7 +45,12 @@ int _printf(const char *format, ...)
                                                 break;
                                         }
                                 default:
-					break;
+					{
+						_putchar('%');
+						_putchar(*format);
+						char_count++;
+						break;
+					}
                         }
                 }
                 else
