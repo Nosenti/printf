@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
+int handle_char(va_list arg_list);
+int handle_string(va_list arg_list);
+int handle_percent(void);
 /**
  * _printf - function to print number of characters
  * @format: char parameter
