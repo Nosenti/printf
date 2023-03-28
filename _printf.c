@@ -30,8 +30,8 @@ int _printf(const char *format, ...)
 					char_count += handle_percent();
 					break;
 				default:
-					_putchar('%');
-					_putchar(*format);
+					putchar('%');
+					putchar(*format);
 					char_count += 2;
 					break;
 			}
