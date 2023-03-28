@@ -1,56 +1,65 @@
-#include "main.h"
-#include "0-putchar.c"
+#include <stdio.h>
 #include <stdarg.h>
-
+#include "main.h"
 /**
- * _printf - printf function
- * @format: format given
- * @...: args
- * Authors: Valodia Uwase and Innocent Ingabire
- * Return: int
+ * _printf - function to print number of characters printed.
+ * @format: char parameter.
+ * Authors: Innocent Ingabire and Valodia Uwase
+ * Return: character.
  */
-
 int _printf(const char *format, ...)
 {
-	va_list args;
-	va_start(args, format);
+        int char_count;
+        va_list arg_list;
 
-	int printed_chars = 0;
-
-	for (const char *p = format; *p != '\0'; p++)
-	{
-		if (*p != '%')
-		{
-			_putchar(*p);
-			printed_chars++;
-			continue;
-		}
-		p++;
-		switch (*p)
-		{
-			case 'c':
-				char c = va_arg(args, int);
-
-				_putchar(c);
-				printed_chars++;
-				break;
-			case 's':
-				char *s = va_arg(args, char *);
-
-				for (char *str = s; *str != '\0'; str++)
-				{
-					_putchar(*str);
-					printed_chars++;
-				}
-				break;
-			case '%':
-				_putchar('%');
-				printed_chars++;
-				break;
-			default:
-				break;
-		}
-	}
-	va_end(args);
-	return (printed_chars);
+        char_count = 0;
+        va_start(arg_list, format);
+        while (*format != '\0')
+        {
+                if (*format == '%')
+                {
+                        format++;
+                        switch (*format)
+                        {
+                                case 'c':
+                                        {
+                                                char arg_c = (char) va_arg(arg_list, int);
+                                                        _putchar(arg_c);
+                                                char_count++;
+                                                break;
+                                        }
+                                case 's':
+                                        {
+                                                char *arg_s = va_arg(arg_list, char *);
+                                                while (*arg_s)
+                                                {
+                                                        _putchar(*arg_s++);
+                                                        char_count++;
+                                                }
+                                                break;
+                                        }
+                                case '%':
+                                        {
+                                                _putchar('%');
+                                                char_count++;
+                                                break;
+                                        }
+                                default:
+                                        {
+                                                _putchar('%');
+                                                _putchar(*format);
+                                                char_count += 2;
+                                                break;
+                                        }
+                        }
+                }
+                else
+                {
+                        _putchar(*format);
+                        char_count++;
+                }
+                format++;
+        }
+        va_end(arg_list);
+        return (char_count);
 }
