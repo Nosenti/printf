@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
-#include "0-putchar.c"
 /**
  * _printf - function to print number of characters
  * @format: char parameter
@@ -39,7 +38,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_putchar(*format);
+			putchar(*format);
 			char_count++;
 		}
 		format++;
@@ -56,7 +55,7 @@ int handle_char(va_list arg_list)
 {
 	char arg_c = (char) va_arg(arg_list, int);
 
-	_putchar(arg_c);
+	putchar(arg_c);
 	return (1);
 }
 /**
@@ -71,7 +70,7 @@ int handle_string(va_list arg_list)
 
 	while (*arg_s)
 	{
-		_putchar(*arg_s++);
+		putchar(*arg_s++);
 		count++;
 	}
 	return (count);
@@ -82,6 +81,6 @@ int handle_string(va_list arg_list)
  */
 int handle_percent(void)
 {
-	_putchar('%');
+	putchar('%');
 	return (1);
 }
