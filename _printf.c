@@ -4,6 +4,7 @@
 int handle_char(va_list arg_list);
 int handle_string(va_list arg_list);
 int handle_percent(void);
+int print_integer(int n);
 /**
  * _printf - function to print number of characters
  * @format: char parameter
