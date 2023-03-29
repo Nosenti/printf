@@ -7,7 +7,7 @@ int handle_percent(void);
 /**
  * _printf - function to print number of characters
  * @format: char parameter
- * Return: character.
+ * Return: integer
  */
 int _printf(const char *format, ...)
 {
