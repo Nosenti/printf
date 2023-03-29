@@ -1,6 +1,7 @@
 #include "main.h"
 #include "0-putchar.c"
 #include <stdarg.h>
+#include <stdio.h>
 
 /**
  * _printf - printf function
@@ -13,6 +14,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
+
 	va_start(args, format);
 
 	int printed_chars = 0;
