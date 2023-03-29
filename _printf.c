@@ -18,6 +18,12 @@ int _printf(const char *format, ...)
 	va_start(arg_list, format);
 	while (*format != '\0')
 	{
+		if (*format != '%')
+		{
+			putchar(*format);
+			char_count++;
+			continue;
+		}
 		if (*format == '%')
 		{
 			format++;
