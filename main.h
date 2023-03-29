@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include "0-putchar.c"
 
+int _putchar(char c);
 int _printf(const char *format, ...);
 int _position(const char *s, int n);
 int _strlen(char *s);
