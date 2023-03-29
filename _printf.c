@@ -29,12 +29,6 @@ int _printf(const char *format, ...)
 				case 's':
 					char_count += handle_string(arg_list);
 					break;
-				case 'd':
-				case 'i':
-					int i = va_arg(args, int);
-
-					char_count += print_integer(i);
-					break;
 				case '%':
 					char_count += handle_percent();
 					break;
