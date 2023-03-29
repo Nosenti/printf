@@ -1,74 +1,89 @@
+#include <stdio.h>
+#include <stdarg.h>
 #include "main.h"
-
+int handle_char(va_list arg_list);
+int handle_string(va_list arg_list);
+int handle_percent(void);
 /**
- * _printf - custom function that format and print data
- * @format:  list of types of arguments passed to the function
- * Return: int
+ * _printf - function to print number of characters
+ * @format: char parameter
+ * Return: character.
  */
-
 int _printf(const char *format, ...)
 {
-	va_list list;
-	int idx, j;
-	int len_buf = 0;
-	char *s;
-	char *create_buff;
+	int char_count;
+	va_list arg_list;
 
-	type_t ops[] = {
-		{"c", print_c},
-		{"s", print_s},
-		{"i", print_i},
-		{"d", print_i},
-		{"b", print_bin},
-		{NULL, NULL}
-	};
-
-	create_buff = malloc(1024 * sizeof(char));
-	if (create_buff == NULL)
+	char_count = 0;
+	va_start(arg_list, format);
+	while (*format != '\0')
 	{
-		free(create_buff);
-		return (-1);
-	}
-	va_start(list, format);
-	if (format == NULL || list == NULL)
-		return (-1);
-	for (idx = 0; format[idx] != '\0'; idx++)
-	{
-		if (format[idx] == '%' && format[idx + 1] == '%')
-			continue;
-		else if (format[idx] == '%')
+		if (*format == '%')
 		{
-			if (format[idx + 1] == ' ')
-				idx += _position(format, idx);
-			for (j = 0; ops[j].f != NULL; j++)
+			format++;
+			switch (*format)
 			{
-				if (format[idx + 1] == *(ops[j].op))
-				{
-					s = ops[j].f(list);
-					if (s == NULL)
-						return (-1);
-					_strlen(s);
-					_strcat(create_buff, s, len_buf);
-					len_buf += _strlen(s);
-					idx++;
+				case 'c':
+					char_count += handle_char(arg_list);
 					break;
-				}
-			}
-			if (ops[j].f == NULL)
-			{
-				create_buff[len_buf] = format[idx];
-				len_buf++;
+				case 's':
+					char_count += handle_string(arg_list);
+					break;
+				case '%':
+					char_count += handle_percent();
+					break;
+				default:
+					_putchar('%');
+					_putchar(*format);
+					char_count += 2;
+					break;
 			}
 		}
 		else
 		{
-			create_buff[len_buf] = format[idx];
-			len_buf++;
+			_putchar(*format);
+			char_count++;
 		}
+		format++;
 	}
-	create_buff[len_buf] = '\0';
-	write(1, create_buff, len_buf);
-	va_end(list);
-	free(create_buff);
-	return (len_buf);
+	va_end(arg_list);
+	return (char_count);
+}
+/**
+ * handle_char - function that handles character arguments.
+ * @arg_list: list of arguments
+ * Return: 1.
+ */
+int handle_char(va_list arg_list)
+{
+	char arg_c = (char) va_arg(arg_list, int);
+
+	_putchar(arg_c);
+	return (1);
+}
+/**
+ * handle_string - function to handle arguments.
+ * @arg_list: list of arguments
+ * Return: a number
+ */
+int handle_string(va_list arg_list)
+{
+	int count = 0;
+	char *arg_s = va_arg(arg_list, char *);
+
+	while (*arg_s)
+	{
+		_putchar(*arg_s++);
+		count++;
+	}
+	return (count);
+}
+/**
+ * handle_percent - function that returns a character.
+ * Return: 1
+ */
+int handle_percent(void)
+{
+	_putchar('%');
+	return (1);
 }
