@@ -4,6 +4,30 @@
 int handle_char(va_list arg_list);
 int handle_string(va_list arg_list);
 int handle_percent(void);
+
+/**
+ * print_integer - print a given integer
+ * @n: a given int
+ * Return: an integer
+ */
+int print_integer(int n)
+{
+	int count = 0;
+
+	if (n < 0)
+	{
+		putchar('-');
+		count++;
+		n = -n;
+	}
+	if (n / 10)
+	{
+		count += print_integer(n / 10);
+	}
+	putchar('0' + n % 10);
+	count++;
+	return (count);
+}
 /**
  * _printf - function to print number of characters
  * @format: char parameter
@@ -28,6 +52,12 @@ int _printf(const char *format, ...)
 					break;
 				case 's':
 					char_count += handle_string(arg_list);
+					break;
+				case 'd':
+				case 'i':
+					int i = va_arg(args, int);
+
+					char_count += print_integer(i);
 					break;
 				case '%':
 					char_count += handle_percent();
