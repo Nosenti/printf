@@ -68,29 +68,6 @@ int handle_char(va_list arg_list)
 	return (1);
 }
 /**
- * print_integer - print integer
- * @n: parameter n
- * Return: int
- */
-int print_integer(int n)
-{
-	int count = 0;
-
-	if (n < 0)
-	{
-		putchar('-');
-		count++;
-		n = -n;
-	}
-	if (n / 10)
-	{
-		count += print_integer(n / 10);
-	}
-	putchar('0' + n % 10);
-	count++;
-	return (count);
-}
-/**
  * handle_string - function to handle arguments.
  * @arg_list: list of arguments
  * Return: a number
