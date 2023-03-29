@@ -94,7 +94,7 @@ int print_integer(int n)
 /**
  * handle_string - function to handle arguments.
  * @arg_list: list of arguments
- * Return: a number
+ * Return: a number when succesful
  */
 int handle_string(va_list arg_list)
 {
