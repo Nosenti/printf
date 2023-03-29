@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include "0-putchar.c"
 
 int _printf(const char *format, ...);
 int _position(const char *s, int n);
